@@ -2,7 +2,7 @@ import Cabecalho from './Cabecalho';
 import Celula from './Celula';
 import Rodape from './Rodape';
 import { useState } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 export default function Jogo() {
 
     const [vezJogador, setVezJogador] = useState('x');
@@ -61,32 +61,33 @@ export default function Jogo() {
             setVezJogador(vez)
             setEstadoTabuleiro(jogada)
             setHistoricoJogadas(historico)
+            console.log(vez)
         } 
     }
 
     return (
-        <View className="jogo" styles={styles.jogo}>
+        <View className="jogo" style={styles.jogo}>
             <Cabecalho vezJogador={vezJogador} />
-            <View className='tabuleiro' styles={styles.tabuleiro}>
-                <View className='linhaTabuleiro' styles={styles.linhaTabuleiro}>
-                    <Celula valor={estadoTabuleiro[0]} onPress={() => handleClickCelula(0)} />
-                    <Celula valor={estadoTabuleiro[1]} onPress={() => handleClickCelula(1)} />
-                    <Celula styles={styles.quebraLinha} className="quebraLinha" valor={estadoTabuleiro[2]} onPress={() => handleClickCelula(2)} />
+            <View className='tabuleiro' style={styles.tabuleiro}>
+                <View className='linhaTabuleiro' style={styles.linhaTabuleiro}>
+                    <Celula valor={estadoTabuleiro[0]} onClick={() => handleClickCelula(0)} />
+                    <Celula valor={estadoTabuleiro[1]} onClick={() => handleClickCelula(1)} />
+                    <Celula  valor={estadoTabuleiro[2]} onClick={() => handleClickCelula(2)} />
                         
 
                 </View>
-                <View className='linhaTabuleiro' styles={styles.linhaTabuleiro}>
-                    <Celula valor={estadoTabuleiro[3]} onPress={() => handleClickCelula(3)} />
-                    <Celula valor={estadoTabuleiro[4]} onPress={() => handleClickCelula(4)} />
-                    <Celula valor={estadoTabuleiro[5]} onPress={() => handleClickCelula(5)} />
+                <View className='linhaTabuleiro' style={styles.linhaTabuleiro}>
+                    <Celula valor={estadoTabuleiro[3]} onClick={() => handleClickCelula(3)} />
+                    <Celula valor={estadoTabuleiro[4]} onClick={() => handleClickCelula(4)} />
+                    <Celula valor={estadoTabuleiro[5]} onClick={() => handleClickCelula(5)} />
                 </View>
-                <View styles={styles.linhaTabuleiro} className='linhaTabuleiro'>
-                    <Celula valor={estadoTabuleiro[6]} onPress={() => handleClickCelula(6)} />
-                    <Celula valor={estadoTabuleiro[7]} onPress={() => handleClickCelula(7)} />
-                    <Celula valor={estadoTabuleiro[8]} onPress={() => handleClickCelula(8)} />
+                <View style={styles.linhaTabuleiro} className='linhaTabuleiro'>
+                    <Celula valor={estadoTabuleiro[6]} onClick={() => handleClickCelula(6)} />
+                    <Celula valor={estadoTabuleiro[7]} onClick={() => handleClickCelula(7)} />
+                    <Celula valor={estadoTabuleiro[8]} onClick={() => handleClickCelula(8)} />
                 </View>
             </View>
-            <Button onPress={reiniciar}>Reiniciar</Button>
+            <Pressable onPress={reiniciar}>Reiniciar</Pressable>
             <Rodape jogadas={historicoJogadas} voltarJogada={voltarJogada} />
         </View>
     )
@@ -96,18 +97,10 @@ export default function Jogo() {
 const styles = StyleSheet.create({
  
   jogo: {
-    flex: 0.4,
+    flex: 1,
     justifyContent: 'center',
     alignItems:'center',
-    top: 10,
-    right: 10,
-    left: 10,
-    bottom: 10,
-    backgroundColor: '#eee',
-    borderWidth: 3,
-    borderColor: '#000',
-    borderRadius: 10,
-    borderStyle: 'solid',
+    
   },
 
 
@@ -119,11 +112,16 @@ const styles = StyleSheet.create({
 
 linhaTabuleiro: {
     
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center'
 },
-quebraLinha: {
-    backgroundColor: '#000'
-}
 
+Rodape: {
+    flex: 0.2,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor: "#ddd",
+}
 });

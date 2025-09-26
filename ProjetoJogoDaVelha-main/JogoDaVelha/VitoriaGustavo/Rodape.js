@@ -1,9 +1,13 @@
 import { View } from "react-native-web"
 import { StyleSheet, Text } from "react-native"
-const Rodape = () => {
+import Jogada from "./Jogada"
+const Rodape = ({jogadas, voltarJogada}) => {
     return (
         <View style={styles.rodape}>
             <Text>Histórico de jogadas:</Text>
+            {jogadas.map(
+                (jog, idJogada) => <Jogada jogada={jog} voltarJogada={() => voltarJogada(idJogada)} />
+            )}
         </View>
     )
 }
@@ -12,12 +16,10 @@ const Rodape = () => {
 const styles = StyleSheet.create({
      rodape: {
     flex: 0.2,
-    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "#4e4d4dff",
-     borderColor: '#666060ff',
-    borderStyle:'solid',
-    borderWidth: 2,
+    width: '100%',
+    padding: 10,
 
 
   }
